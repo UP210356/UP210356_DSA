@@ -26,7 +26,7 @@ def posfix(Q):
           "arctan", "arccos", "arcsen", "log", "ln", "alog", "aln","√"}
     S = []
     P = []
-    if Q[0] == '-':
+    if Q[1] == '-':
         Q.insert(0,'0')
     Q.insert(0, "(")
     Q.append(")")
