@@ -27,7 +27,7 @@ def posfix(Q):
     S = []
     P = []
     if Q[1] == '-':
-        Q.insert(0,'0')
+        Q.insert(1,'0')
     Q.insert(0, "(")
     Q.append(")")
     for i in Q:
