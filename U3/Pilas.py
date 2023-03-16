@@ -37,15 +37,28 @@ class Stack:
         return self.head.data
 
     def show(self):
-        while self.isEmpty() == False:
-            a = self.pop()
-            b = self.pop()
-            Data = a + " " + b
-        return Data
+        D2 = self.head.data
+        l = self.size
+        for i in range(l-1):
+            self.head = self.head.next
+            D1 = self.head.data
+            D2 = D2 + "  " + D1
+        return D2
+    
+    def exist(self, data):
+        a = self.head.data
+        l = self.size
+        for i in range(l-1):
+            self.head = self.head.next
+            if a == data:
+                return True
+            else:
+                continue
+        return False
 
 n1=Stack()
 n1.push("Jesus")
 n1.push("Maria")
 n1.push("Jose")
 
-print(n1.show())
+print(n1.exist("Jose"))
