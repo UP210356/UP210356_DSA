@@ -37,7 +37,7 @@ class Queue:
         l = self.getSize()
         Data = self.tail.data
         self.tail = self.head
-        for i in range(l-1):
+        for i in range(l):
             self.head.next = self.tail
         self.size -= 1 
         return Data
