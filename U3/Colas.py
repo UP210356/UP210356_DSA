@@ -25,13 +25,27 @@ class Queue:
     
     def enqueue(self, data):
         newNode = Node(data)
-        self.head = newNode
-        self.tail = newNode
         self.size += 1
+        if self.isEmpty():
+            self.head = newNode
+            self.tail = newNode
+        else:
+            self.tail.next = newNode
+            self.tail = self.tail.next
 
-    #def dequeue(self):
+    def dequeue(self):
+        l = self.getSize()
+        Data = self.tail.data
+        self.tail = self.head
+        for i in range(l-1):
+            self.head.next = self.tail
+        self.size -= 1 
+        return Data
 
 
 q = Queue()
-print(q.getSize())
-
+q.enqueue("Jose")
+q.enqueue("Maria")
+q.enqueue("Jesus")
+print(q.dequeue())
+print(q.dequeue())
