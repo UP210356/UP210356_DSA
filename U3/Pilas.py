@@ -57,8 +57,7 @@ class Stack:
         return False
 
 n1=Stack()
-n1.push("Jesus")
-n1.push("Maria")
 n1.push("Jose")
-
-print(n1.exist("Jose"))
+n1.push("Maria")
+n1.push("Jesus")
+print(n1.show())

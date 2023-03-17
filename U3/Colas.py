@@ -41,11 +41,30 @@ class Queue:
             self.head.next = self.tail
         self.size -= 1 
         return Data
-
+    
+    def show(self):
+        D2 = self.head.data
+        l = self.size
+        for i in range(l-1):
+            self.head = self.head.next
+            D1 = self.head.data
+            D2 = D2 + "  " + D1
+        return D2
+    
+    def exist(self, data):
+        a = self.head.data
+        l = self.size
+        for i in range(l-1):
+            self.head = self.head.next
+            if a == data:
+                return True
+            else:
+                continue
+        return False
+    
 
 q = Queue()
 q.enqueue("Jose")
 q.enqueue("Maria")
 q.enqueue("Jesus")
-print(q.dequeue())
-print(q.dequeue())
+print(q.exist("Maria"))
