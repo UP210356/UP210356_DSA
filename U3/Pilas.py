@@ -33,7 +33,6 @@ class Stack:
             del old
         return Data
         
-        
     def peak(self):
         return self.head.data
 
@@ -61,4 +60,4 @@ n1=Stack()
 n1.push("Jose")
 n1.push("Maria")
 n1.push("Jesus")
-print(n1.show())
+print(n1.pop())

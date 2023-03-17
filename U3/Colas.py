@@ -34,14 +34,12 @@ class Queue:
             self.tail = self.tail.next
 
     def dequeue(self):
-        old = self.head
-        l = self.getSize()
-        Data = self.tail.data
-        self.tail = self.head
-        for i in range(l):
-            self.head.next = self.tail
-        self.size -= 1 
-        del old
+        if self.isEmpty() == False:
+            old = self.head
+            Data = self.head.data
+            self.head = self.head.next
+            self.size -= 1
+            del old
         return Data
     
     def show(self):
@@ -69,4 +67,7 @@ q = Queue()
 q.enqueue("Jose")
 q.enqueue("Maria")
 q.enqueue("Jesus")
-print(q.exist("Maria"))
+print(q.pop())
+print(q.pop())
+print(q.pop())
+print(q.pop())
