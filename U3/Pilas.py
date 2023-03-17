@@ -26,12 +26,13 @@ class Stack:
 
     def pop(self):
         if self.isEmpty() == False:
+            old = self.head
             Data = self.head.data
             self.head = self.head.next
             self.size -= 1
-            return Data
-        else: 
-            return None
+            del old
+        return Data
+        
         
     def peak(self):
         return self.head.data

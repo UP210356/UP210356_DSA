@@ -34,12 +34,14 @@ class Queue:
             self.tail = self.tail.next
 
     def dequeue(self):
+        old = self.head
         l = self.getSize()
         Data = self.tail.data
         self.tail = self.head
         for i in range(l):
             self.head.next = self.tail
         self.size -= 1 
+        del old
         return Data
     
     def show(self):
