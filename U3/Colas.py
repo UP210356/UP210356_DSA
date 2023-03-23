@@ -36,11 +36,15 @@ class Queue:
     def dequeue(self):
         if self.isEmpty() == False:
             old = self.head
+            if self.size == 1:
+                self.tail = None
             Data = self.head.data
             self.head = self.head.next
             self.size -= 1
             del old
-        return Data
+            return Data
+        else:
+            return None
     
     def show(self):
         D2 = self.head.data
@@ -48,10 +52,11 @@ class Queue:
         for i in range(l-1):
             self.head = self.head.next
             D1 = self.head.data
-            D2 = D2 + "  " + D1
-        return D2
+            D2 = D2 + " " + D1
+            D3 = "Head  " + D2 + "  Tail"
+        return D3
     
-    def exist(self, data):
+    def search(self, data):
         a = self.head.data
         l = self.size
         for i in range(l-1):
@@ -67,7 +72,4 @@ q = Queue()
 q.enqueue("Jose")
 q.enqueue("Maria")
 q.enqueue("Jesus")
-print(q.pop())
-print(q.pop())
-print(q.pop())
-print(q.pop())
+print(q.show())

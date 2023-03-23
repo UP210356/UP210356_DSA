@@ -42,10 +42,11 @@ class Stack:
         for i in range(l-1):
             self.head = self.head.next
             D1 = self.head.data
-            D2 = D2 + "  " + D1
-        return D2
+            D2 = D2 + " " + D1
+            D3 = "Head  " + D2 + "  Tail"
+        return D3
     
-    def exist(self, data):
+    def search(self, data):
         a = self.head.data
         l = self.size
         for i in range(l-1):
@@ -60,4 +61,4 @@ n1=Stack()
 n1.push("Jose")
 n1.push("Maria")
 n1.push("Jesus")
-print(n1.pop())
+print(n1.show())
