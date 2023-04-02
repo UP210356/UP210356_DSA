@@ -5,58 +5,68 @@ class Node:
     
     def getData(self):
         return self.data
-    
-    def getNext(self):
-        return self.next
-    
-    def asignData(self, next):
-        self.data = next
 
-    def asignNext(self, new):
-        self.next = new
-    
 class List:
+    def __init__(self, data):
+        self.head = None
+        self.size = 0
+
     def insert(self, data):
-        act = self.cabeza
+        act = self.head
         prev = None
-        detenerse = False
-        while act != None and not detenerse:
-            if act.getData() > data:
-                detenerse = True
+        stop = False
+        while act != None and not stop:
+            if self.head > data:
+                stop = True
             else:
                 prev = act
-                act = act.getNext()
-
+                act = self.head.next()
         temp = Node(data)
         if prev == None:
-            temp.asignNext(self.cabeza)
+            temp.asignNext(self.head)
             self.cabeza = temp
         else:
             temp.asignNext(act)
             prev.asignNext(temp)
+        self.size += 1
+
+    def isEmpty(self):
+        return self.head == None
             
     def deldat(self, data):
-        pass
+        act = self.head
+        prev = None
+        found = False
+        while not found:
+            if act.getData() == data:
+                found = True
+            else:
+                prev = act
+                act = act.getNext()
+
+        if prev == None:
+            self.cabeza = act.getNext()
+        else:
+            prev.asignNext(act.getNext())
 
     def delpos(self, pos):
         pass
 
     def getSize(self):
-        pass
+        return self.size
 
     def search(self, data):
-        actual = self.head
+        act = self.head
         found = False
         stop = False
         while actual != None and not found and not stop:
-            if actual.obtenerDato() == data:
+            if act.getData() == data:
                 encontrado = True
             else:
-                if actual.obtenerDato() > data:
-                    detenerse = True
+                if act.getData() > data:
+                    stop = True
                 else:
-                    actual = actual.obtenerSiguiente()
-
+                    actual = actual.getNext()
         return encontrado
     
     def seek(self, pos):
@@ -73,4 +83,4 @@ q = List()
 q.insert(56)
 q.insert(2)
 q.insert(34)
-print(q.show())
+print(q.getSize())
