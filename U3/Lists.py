@@ -1,96 +1,100 @@
 class Node:
-    def __init__(self, dato):
-        self.data = dato
-        self.next = None
-    
-    def getData(self):
-        return self.data
-    
-    def nextNode(self):
-        return self.next
-    
-    def asignNext(self, newData):
-        self.next = newData
+    def __init__(self,datoInicial):
+        self.dato = datoInicial
+        self.siguiente = None
+
+    def obtenerDato(self):
+        return self.dato
+
+    def obtenerSiguiente(self):
+        return self.siguiente
+
+    def asignarDato(self,nuevodato):
+        self.dato = nuevodato
+
+    def asignarSiguiente(self,nuevosiguiente):
+        self.siguiente = nuevosiguiente
 
 class List:
     def __init__(self):
-        self.head = None
-        self.size = 0
+        self.cabeza = None
+        self.cola = None
+        self.size=0
 
-    def isEmpty(self):
-            return self.head == None
+    def estaVacia(self):
+        return self.cabeza == None
     
-    def insert(self, data):
-        newNode = Node(data)
-        if self.head is None:
-            self.head = newNode
-        elif self.head.data > data:
-            self.head, newNode.next = newNode, self.head
-        else:
-            currentNode = self.head
-            while True:
-                if currentNode.nextNode is None:
-                    currentNode.nextNode = newNode
-                    break
-                elif currentNode.next.data >= data:
-                    newNode.nextNode = currentNode.nextNode
-                    currentNode.nextNode = newNode
-                    break
-                currentNode = currentNode.nextNode
-        self.size += 1
-        return self.head.data
-        
-            
-    def deldat(self, data):
-        actual = self.head
-        previo = None
+    def search(self,item):
+        actual = self.cabeza
+        pos = 0
         encontrado = False
-        while not encontrado:
-            if actual.data == data:
+        detenerse = False
+        while actual != None and not encontrado and not detenerse:
+            if actual.obtenerDato() == item:
                 encontrado = True
             else:
-                previo = actual
-                actual = actual.next
-        if previo == None:
-            self.cabeza = actual.next
+                if actual.obtenerDato() > item:
+                    detenerse = True
+                else:
+                    actual = actual.obtenerSiguiente()
+            pos+=1
+        if encontrado == True:
+            return pos
         else:
-            previo.asignNext(actual.next)
-        self.size-=1
-        return data
+            return encontrado
+    
+    def seek(self, pos):
+        actual = self.cabeza
+        if pos < self.size:
+            for i in range(pos):
+                actual = actual.siguiente
+            return actual.dato
+        else:
+            return None
+    
+    def insert(self,item):
+        actual = self.cabeza
+        previo = None
+        detenerse = False
+        while actual != None and not detenerse:
+            if actual.obtenerDato() > item:
+                detenerse = True
+            else:
+                previo = actual
+                actual = actual.obtenerSiguiente()
+        temp = Node(item)
+        if previo == None:
+            temp.asignarSiguiente(self.cabeza)
+            self.cabeza = temp
+        else:
+            temp.asignarSiguiente(actual)
+            previo.asignarSiguiente(temp)
+        self.size+=1
+
+    def delData(self, data):
+        pass
 
     def delpos(self, pos):
         pass
 
-    def getSize(self):
-        return self.size
-
-    def search(self, data):
-        act = self.head
-        found = False
-        stop = False
-        while act != None and not found and not stop:
-            if act.getData() == data:
-                found = True
-            else:
-                if act.getData() > data:
-                    stop = True
-                else:
-                    act = act.next
-        return found
-    
-    def seek(self, pos):
-        pass
-
     def printIzq(self):
-        pass
+        nodo = self.cabeza
+        while nodo is not None:
+            print(nodo.dato, end= ' ')
+            nodo = nodo.siguiente
+        print()
 
     def printDer(self):
-        pass
-
+        nodo = self.cabeza
+        while nodo is not None:
+            print(nodo.dato, end= ' ')
+            nodo = nodo.siguiente
+        print()
 
 L = List()
 L.insert(56)
 L.insert(2)
 L.insert(34)
 L.insert(100)
-print(L.getSize())
+print(L.size)
+print(L.seek(4))
