@@ -1,53 +1,62 @@
 class Node:
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, dato):
+        self.data = dato
         self.next = None
     
     def getData(self):
         return self.data
+    
+    def nextNode(self):
+        return self.next
+    
+    def asignNext(self, newData):
+        self.next = newData
 
 class List:
-    def __init__(self, data):
+    def __init__(self):
         self.head = None
         self.size = 0
 
-    def insert(self, data):
-        act = self.head
-        prev = None
-        stop = False
-        while act != None and not stop:
-            if self.head > data:
-                stop = True
-            else:
-                prev = act
-                act = self.head.next()
-        temp = Node(data)
-        if prev == None:
-            temp.asignNext(self.head)
-            self.cabeza = temp
-        else:
-            temp.asignNext(act)
-            prev.asignNext(temp)
-        self.size += 1
-
     def isEmpty(self):
-        return self.head == None
+            return self.head == None
+    
+    def insert(self, data):
+        newNode = Node(data)
+        if self.head is None:
+            self.head = newNode
+        elif self.head.data > data:
+            self.head, newNode.next = newNode, self.head
+        else:
+            currentNode = self.head
+            while True:
+                if currentNode.nextNode is None:
+                    currentNode.nextNode = newNode
+                    break
+                elif currentNode.next.data >= data:
+                    newNode.nextNode = currentNode.nextNode
+                    currentNode.nextNode = newNode
+                    break
+                currentNode = currentNode.nextNode
+        self.size += 1
+        return self.head.data
+        
             
     def deldat(self, data):
-        act = self.head
-        prev = None
-        found = False
-        while not found:
-            if act.getData() == data:
-                found = True
+        actual = self.head
+        previo = None
+        encontrado = False
+        while not encontrado:
+            if actual.data == data:
+                encontrado = True
             else:
-                prev = act
-                act = act.getNext()
-
-        if prev == None:
-            self.cabeza = act.getNext()
+                previo = actual
+                actual = actual.next
+        if previo == None:
+            self.cabeza = actual.next
         else:
-            prev.asignNext(act.getNext())
+            previo.asignNext(actual.next)
+        self.size-=1
+        return data
 
     def delpos(self, pos):
         pass
@@ -59,15 +68,15 @@ class List:
         act = self.head
         found = False
         stop = False
-        while actual != None and not found and not stop:
+        while act != None and not found and not stop:
             if act.getData() == data:
-                encontrado = True
+                found = True
             else:
                 if act.getData() > data:
                     stop = True
                 else:
-                    actual = actual.getNext()
-        return encontrado
+                    act = act.next
+        return found
     
     def seek(self, pos):
         pass
@@ -79,8 +88,9 @@ class List:
         pass
 
 
-q = List()
-q.insert(56)
-q.insert(2)
-q.insert(34)
-print(q.getSize())
+L = List()
+L.insert(56)
+L.insert(2)
+L.insert(34)
+L.insert(100)
+print(L.getSize())
