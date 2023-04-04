@@ -114,22 +114,24 @@ class List:
         return dato
 
     def printIzq(self):
-        nodo = self.cabeza
-        while nodo is not None:
-            print(nodo.dato, end= ' ')
-            nodo = nodo.siguiente
-        print()
+        current = self.cabeza
+        while current is not None:
+            print(current.dato)
+            current = current.siguiente
 
     def printDer(self):
-        nodo = self.cabeza
-        while nodo is not None:
-            print(nodo.dato, end= ' ')
-            nodo = nodo.siguiente
-        print()
+        stack = []
+        current = self.cabeza
+        while current is not None:
+            stack.append(current.dato)
+            current = current.siguiente
+        while stack:
+            print(stack.pop())
+    
 
 L = List()
 L.insert(56)
 L.insert(2)
 L.insert(34)
 L.insert(100)
-L.delPos(2)
+L.printIzq()
