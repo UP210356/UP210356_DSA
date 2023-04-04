@@ -72,11 +72,12 @@ class List:
         self.size+=1
 
     def delData(self, item):
-        actual = self.cabeza
-        pos=0
-        previo = None
-        encontrado = False
-        if self.search(item) == True:
+        si = self.search(item)
+        if si != None:
+            actual = self.cabeza
+            pos=0
+            previo = None
+            encontrado = False
             while not encontrado:
                 if actual.obtenerDato() == item:
                     encontrado = True
@@ -89,10 +90,8 @@ class List:
             else:
                 previo.asignarSiguiente(actual.obtenerSiguiente())
             self.size-=1
-            print(pos)
             return pos
-        else:
-            return None
+        else: return None
 
     def delPos(self, pos):
         dato = self.seek(pos)
@@ -110,7 +109,6 @@ class List:
         else:
             previo.asignarSiguiente(actual.obtenerSiguiente())
         self.size-=1
-        print(dato)
         return dato
 
     def printIzq(self):
@@ -134,4 +132,30 @@ L.insert(56)
 L.insert(2)
 L.insert(34)
 L.insert(100)
+L.insert(200)
+#2,34,56,100,200
+'''
+print(L.delPos(2))
+print('---')
 L.printIzq()
+'''
+'''
+print(L.delData(34))
+print('---')
+L.printIzq()
+'''
+'''
+print(L.seek(3))
+print(L.search(200))
+'''
+'''
+L.printDer()
+'''
+
+#insert
+#delPos
+#delData
+#search(dato)
+#seek(pos)
+#printIzq
+#printder
