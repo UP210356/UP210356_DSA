@@ -71,11 +71,47 @@ class List:
             previo.asignarSiguiente(temp)
         self.size+=1
 
-    def delData(self, data):
-        pass
+    def delData(self, item):
+        actual = self.cabeza
+        pos=0
+        previo = None
+        encontrado = False
+        if self.search(item) == True:
+            while not encontrado:
+                if actual.obtenerDato() == item:
+                    encontrado = True
+                else:
+                    previo = actual
+                    actual = actual.obtenerSiguiente()
+                pos+=1
+            if previo == None:
+                self.cabeza = actual.obtenerSiguiente()
+            else:
+                previo.asignarSiguiente(actual.obtenerSiguiente())
+            self.size-=1
+            print(pos)
+            return pos
+        else:
+            return None
 
-    def delpos(self, pos):
-        pass
+    def delPos(self, pos):
+        dato = self.seek(pos)
+        actual = self.cabeza
+        previo = None
+        encontrado = False
+        while not encontrado:
+            if actual.obtenerDato() == dato:
+                encontrado = True
+            else:
+                previo = actual
+                actual = actual.obtenerSiguiente()
+        if previo == None:
+            self.cabeza = actual.obtenerSiguiente()
+        else:
+            previo.asignarSiguiente(actual.obtenerSiguiente())
+        self.size-=1
+        print(dato)
+        return dato
 
     def printIzq(self):
         nodo = self.cabeza
@@ -96,5 +132,4 @@ L.insert(56)
 L.insert(2)
 L.insert(34)
 L.insert(100)
-print(L.size)
-print(L.seek(4))
+L.delPos(2)
